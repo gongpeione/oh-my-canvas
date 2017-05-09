@@ -33,7 +33,11 @@ module.exports = {
 					fallback: "style-loader",
 					use: ['css-loader?minimize', 'sass-loader']
 				})
-			}
+			},
+			{
+				test: /template\.html?$/,
+				use: ['html-loader']
+			},
 		]
 	},
 
