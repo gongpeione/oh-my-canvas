@@ -23,13 +23,20 @@ const handlers = handler('.container');
 const routes = menu.map(item => {
 	return {
 		path: '/' + item.name.toLowerCase(),
-		handler: handlers[item.name.toLowerCase()]
+		handler: handlers[item.name.toLowerCase()],
+		default: item.default || false
 	}
 });
 
 const r = new Router(routes).parse(menuEl.querySelectorAll('a'));
-r.afterEach(() => {
+r.afterEach((from, to) => {
+	if (to.path.indexOf('home') > -1) return;
 	switchBox.checked = false;
 	switcher.classList.add('hidden');
 });
 r.start();
+
+setTimeout(() => {
+	switchBox.checked = true;
+	switcher.classList.remove('hidden');
+}, 1000);
