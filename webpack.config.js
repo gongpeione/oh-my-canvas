@@ -35,6 +35,10 @@ module.exports = {
 				})
 			},
 			{
+				test: /\.jpe?g$|\.gif$|\.png$|\.svg$/,
+				use: ['file-loader?limit=1024']
+			},
+			{
 				test: /template\.html?$/,
 				use: ['html-loader']
 			},
@@ -48,5 +52,12 @@ module.exports = {
 			hash: true
 		}),
 		new ExtractTextPlugin("style.css"),
-	]
+	],
+
+	devServer: {
+		historyApiFallback: true,
+		hot: false,
+		inline: true,
+		port: 2333
+	},
 }
