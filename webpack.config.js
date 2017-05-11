@@ -52,7 +52,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: path.resolve('./index.html'),
 			inject: 'body',
-			hash: true
+			hash: false
 		}),
 		new ExtractTextPlugin("static/css/style.[hash:4].css"),
 	],
