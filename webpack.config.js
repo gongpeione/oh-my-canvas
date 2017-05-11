@@ -6,11 +6,14 @@ const index = path.resolve('./src');
 const distDir = path.resolve('./dist');
 
 module.exports = {
-	entry: index,
+	entry: {
+		'static/js': index
+	},
 	output: {
 		path: distDir,
-		// publicPath: 'static',
-		filename: 'index.js',
+		publicPath: '',
+		filename: '[name]/index.[hash:4].js',
+		chunkFilename: '[name]/[id].js'
 	},
 	resolve: {
 		alias: {
@@ -36,7 +39,7 @@ module.exports = {
 			},
 			{
 				test: /\.jpe?g$|\.gif$|\.png$|\.svg$/,
-				use: ['file-loader?limit=1024']
+				use: ['file-loader?name=[name].[ext]&limit=1024&outputPath=static/img/']
 			},
 			{
 				test: /template\.html?$/,
@@ -51,7 +54,7 @@ module.exports = {
 			inject: 'body',
 			hash: true
 		}),
-		new ExtractTextPlugin("style.css"),
+		new ExtractTextPlugin("static/css/style.[hash:4].css"),
 	],
 
 	devServer: {
